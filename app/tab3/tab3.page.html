@@ -1,17 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
+    <ion-title style="text-align:center">
+      List Gambar
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-grid>
+    <ion-row *ngFor="let iFoto of dataImage; let i = index ">
+      <ion-col size="1">
+        {{i+1}}. 
+      </ion-col>
+      <ion-col size="2">
+        <ion-img [src]="iFoto.url"></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-label>{{iFoto.nama}}</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
