@@ -10,6 +10,7 @@ import { FotoService } from '../foto.service';
 export class Tab3Page {
 
   dataImage : any = [];
+  condition = '3';
 
   constructor(private afStorage : AngularFireStorage, public fotoService: FotoService) {}
 

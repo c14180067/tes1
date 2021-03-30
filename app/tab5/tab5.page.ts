@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab5Page implements OnInit {
 
+  condition = '5';
+  
   constructor() { }
 
   ngOnInit() {

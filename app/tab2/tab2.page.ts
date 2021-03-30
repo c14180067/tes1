@@ -9,6 +9,7 @@ import { FotoService, Photo } from '../foto.service';
 })
 export class Tab2Page {
 
+  condition = '2';
   urlImageStorage : string[] = [];
   selectedPhoto : Photo;
 
