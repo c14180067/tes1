@@ -11,7 +11,7 @@ export class Tab2Page {
 
   condition = '2';
   urlImageStorage : string[] = [];
-  selectedPhoto : Photo;
+  selectedPhoto : Photo[];
 
   constructor(public fotoService: FotoService, private afStorage : AngularFireStorage) {}
 
@@ -25,18 +25,20 @@ export class Tab2Page {
 
   select(dataFoto) {
     console.log('selected');
-    this.selectedPhoto = dataFoto;
-    console.log(this.selectedPhoto);
+    this.selectedPhoto.push(dataFoto);
   }
 
   uploadFoto() {
     if(this.selectedPhoto) {
-      const imgFilePath = `imgStorage/${this.selectedPhoto.filePath}`
-      this.afStorage.upload(imgFilePath, this.selectedPhoto.dataImage).then(() => {
-       this.afStorage.storage.ref().child(imgFilePath).getDownloadURL().then(url => {
-        this.urlImageStorage.unshift(url)
-       });
-      });
+      for(var i = 0; i < this.selectedPhoto.length; i++) {
+        const imgFilePath = `imgStorage/${this.selectedPhoto[i].filePath}`
+        this.afStorage.upload(imgFilePath, this.selectedPhoto[i].dataImage).then(() => {
+         this.afStorage.storage.ref().child(imgFilePath).getDownloadURL().then(url => {
+          this.urlImageStorage.unshift(url)
+         });
+        });
+      }
     }
+    this.selectedPhoto = [];
   }
 }
