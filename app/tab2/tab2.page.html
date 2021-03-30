@@ -9,8 +9,8 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
-      <ion-col size="4" *ngFor="let foto of fotoService.dataFoto; index as position">
-        <ion-img [src]="foto.webviewPath" (click)="select(foto)"></ion-img>
+      <ion-col size="4" *ngFor="let foto of fotoService.dataFoto; let i = index">
+        <ion-img id="{{i}}" [src]="foto.webviewPath" (click)="select(foto,i)"></ion-img>
       </ion-col>
     </ion-row>
   </ion-grid>

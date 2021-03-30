@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FotoService, Photo } from '../foto.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -13,19 +14,35 @@ export class Tab2Page {
   urlImageStorage : string[] = [];
   selectedPhoto : Photo[] = [];
 
-  constructor(public fotoService: FotoService, private afStorage : AngularFireStorage) {}
+  constructor(public fotoService: FotoService, private afStorage : AngularFireStorage, public alertController: AlertController) {}
 
   async ngOnInit() {
     await this.fotoService.loadFoto();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Sukses',
+      message: 'Foto berhasil di upload!',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
   tambahFoto() {
     this.fotoService.tambahFoto();
   }
 
-  select(dataFoto) {
-    console.log('selected');
-    this.selectedPhoto.unshift(dataFoto);
+  select(dataFoto, id) {
+    if(!this.selectedPhoto.includes(dataFoto)) {
+      document.getElementById(id).style.border = '5px solid'
+      this.selectedPhoto.unshift(dataFoto);
+    }
+    else {
+      document.getElementById(id).style.border = '0px solid'
+      const index = this.selectedPhoto.indexOf(dataFoto);
+      this.selectedPhoto.splice(index,1);
+    }
   }
 
   uploadFoto() {
@@ -40,5 +57,6 @@ export class Tab2Page {
       }
     }
     this.selectedPhoto = [];
+    this.presentAlert();
   }
 }
