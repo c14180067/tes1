@@ -11,7 +11,7 @@ export class Tab2Page {
 
   condition = '2';
   urlImageStorage : string[] = [];
-  selectedPhoto : Photo[];
+  selectedPhoto : Photo[] = [];
 
   constructor(public fotoService: FotoService, private afStorage : AngularFireStorage) {}
 
@@ -25,7 +25,7 @@ export class Tab2Page {
 
   select(dataFoto) {
     console.log('selected');
-    this.selectedPhoto.push(dataFoto);
+    this.selectedPhoto.unshift(dataFoto);
   }
 
   uploadFoto() {
